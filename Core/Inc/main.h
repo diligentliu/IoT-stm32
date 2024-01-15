@@ -38,6 +38,7 @@ extern "C" {
 #include "outer_timer.h"
 #include "breathing_light.h"
 #include "servos.h"
+#include "input_capture.h"
 
 #ifdef __cplusplus
 }

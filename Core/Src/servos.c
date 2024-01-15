@@ -38,3 +38,7 @@ void set_servos_compare(uint16_t compare) {
 void set_servos_angle(float angle) {
 	set_servos_compare(angle / 180.0f * 2000.0f - 500.0f);
 }
+
+void set_servos_prescaler(uint16_t prescaler) {
+	TIM_PrescalerConfig(TIM2, prescaler, TIM_PSCReloadMode_Immediate);
+}

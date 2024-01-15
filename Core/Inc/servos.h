@@ -25,5 +25,6 @@
 void servos_init();
 void set_servos_compare(uint16_t compare);
 void set_servos_angle(float angle);
+void set_servos_prescaler(uint16_t prescaler);
 
 #endif //STM32_STD_SERVOS_H
