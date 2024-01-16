@@ -40,6 +40,7 @@ extern "C" {
 #include "breathing_light.h"
 #include "servos.h"
 #include "input_capture.h"
+#include "ad.h"
 
 #ifdef __cplusplus
 }
