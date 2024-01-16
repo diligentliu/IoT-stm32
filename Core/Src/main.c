@@ -4,15 +4,18 @@ uint16_t num = 0;
 
 int main(void) {
 	OLED_Init();
-	servos_init();
+	pwm_init();
 	ic_init();
 
 	OLED_ShowString(1, 1, "Freq : 00000Hz");
-	set_servos_prescaler(36 - 1);
-	set_servos_compare(50);
+	OLED_ShowString(2, 1, "Duty : 00%");
+
+	pwm_set_prescaler(720 - 1);
+	pwm_set_compare(50);
 
 	while (1) {
 		OLED_ShowNum(1, 8, ic_get_freq(), 5);
+		OLED_ShowNum(2, 8, ic_get_duty(), 2);
 	}
 }
 

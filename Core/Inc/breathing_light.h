@@ -18,6 +18,5 @@
  *	}
  */
 void breathing_light_init();
-void pwm_set_compare(uint16_t compare);
 
 #endif //STM32_STD_BREATHING_LIGHT_H

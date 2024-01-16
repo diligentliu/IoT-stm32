@@ -36,6 +36,7 @@ extern "C" {
 #include "oled.h"
 #include "timer.h"
 #include "outer_timer.h"
+#include "pwm.h"
 #include "breathing_light.h"
 #include "servos.h"
 #include "input_capture.h"
