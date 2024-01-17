@@ -18,8 +18,8 @@ void ad_init() {
 	adcInitTypeDef.ADC_Mode = ADC_Mode_Independent;
 	adcInitTypeDef.ADC_DataAlign = ADC_DataAlign_Right;
 	adcInitTypeDef.ADC_ExternalTrigConv = ADC_ExternalTrigConv_None;
-	adcInitTypeDef.ADC_ContinuousConvMode = DISABLE;
-	adcInitTypeDef.ADC_ScanConvMode = DISABLE;
+	adcInitTypeDef.ADC_ContinuousConvMode = DISABLE;    // 连续
+	adcInitTypeDef.ADC_ScanConvMode = DISABLE;          // 连续转换
 	adcInitTypeDef.ADC_NbrOfChannel = 1;
 	ADC_Init(ADC1, &adcInitTypeDef);
 

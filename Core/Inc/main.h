@@ -41,6 +41,7 @@ extern "C" {
 #include "servos.h"
 #include "input_capture.h"
 #include "ad.h"
+#include "dma_data_transfer.h"
 
 #ifdef __cplusplus
 }
