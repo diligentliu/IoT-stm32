@@ -34,6 +34,7 @@ extern "C" {
 #include "led.h"
 #include "key.h"
 #include "oled.h"
+#include "rotate_encoder.h"
 #include "timer.h"
 #include "outer_timer.h"
 #include "pwm.h"

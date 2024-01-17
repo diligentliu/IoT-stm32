@@ -35,12 +35,12 @@ uint16_t get_count_sensor(void) {
 	return CountSensor_Count;
 }
 
-void EXTI0_IRQHandler(void) {
-	if (EXTI_GetITStatus(EXTI_Line0) == SET) {
-		/* 如果出现数据乱跳的现象，可再次判断引脚电平，以避免抖动 */
-		if (GPIO_ReadInputDataBit(GPIOA, GPIO_Pin_0) == 0) {
-			CountSensor_Count++;
-		}
-		EXTI_ClearITPendingBit(EXTI_Line0);
-	}
-}
+// void EXTI0_IRQHandler(void) {
+// 	if (EXTI_GetITStatus(EXTI_Line0) == SET) {
+// 		/* 如果出现数据乱跳的现象，可再次判断引脚电平，以避免抖动 */
+// 		if (GPIO_ReadInputDataBit(GPIOA, GPIO_Pin_0) == 0) {
+// 			CountSensor_Count++;
+// 		}
+// 		EXTI_ClearITPendingBit(EXTI_Line0);
+// 	}
+// }
