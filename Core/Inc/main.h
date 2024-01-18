@@ -28,6 +28,8 @@ extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
+#include <stdio.h>
+
 #include "stm32f10x_it.h"
 #include "count_sensor.h"
 #include "delay.h"
@@ -43,6 +45,7 @@ extern "C" {
 #include "input_capture.h"
 #include "ad.h"
 #include "dma_data_transfer.h"
+#include "serial.h"
 
 #ifdef __cplusplus
 }
