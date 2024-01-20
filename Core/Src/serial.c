@@ -63,6 +63,11 @@ void serial_send_number(uint32_t number, uint8_t length) {
 	}
 }
 
+int serial_read_byte() {
+	while (USART_GetFlagStatus(USART1, USART_FLAG_RXNE) == RESET);
+	return (int) USART_ReceiveData(USART1);
+}
+
 int __io_putchar(int ch) {
 	serial_send_byte(ch);
 	return ch;

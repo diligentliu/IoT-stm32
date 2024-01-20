@@ -32,5 +32,6 @@ void serial_send_byte(uint8_t byte);
 void serial_send_array(uint8_t *array, uint16_t length);
 void serial_send_string(const char *string);
 void serial_send_number(uint32_t number, uint8_t length);
+int serial_read_byte();
 
 #endif //STM32_STD_SERIAL_H

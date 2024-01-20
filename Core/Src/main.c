@@ -6,25 +6,19 @@ uint8_t data_2[] = {0, 0, 0, 0};
 
 int main(void) {
 	OLED_Init();
-	serial_init();
-	serial_send_byte(0x41);
+	mpu6050_init();
 
-	uint8_t array[8];
-	for (int i = 0; i < 8; ++i) {
-		array[i] = 'a' + i;
-	}
-	serial_send_array(array, 8);
-	const char *string = "我可以是中文嘛？";
-	serial_send_string(string);
-	serial_send_number(9999, 4);
-
-	printf("Num = %d\r\n", 666);
-
+	int16_t acc_x, acc_y, acc_z, gyro_x, gyro_y, gyro_z;
+	uint8_t id = mpu6050_r_reg(MPU6050_WHO_AM_I);
+	OLED_ShowHexNum(1, 1, id, 2);
 	while (1) {
-		if (USART_GetFlagStatus(USART1, USART_FLAG_RXNE) == SET) {
-			uint8_t data = USART_ReceiveData(USART1);
-			OLED_ShowHexNum(1, 1, data, 2);
-		}
+		mpu6050_get_data(&acc_x, &acc_y, &acc_z, &gyro_x, &gyro_y, &gyro_z);
+		OLED_ShowSignedNum(2, 1, acc_x, 5);
+		OLED_ShowSignedNum(3, 1, acc_y, 5);
+		OLED_ShowSignedNum(4, 1, acc_z, 5);
+		OLED_ShowSignedNum(2, 8, gyro_x, 5);
+		OLED_ShowSignedNum(3, 8, gyro_y, 5);
+		OLED_ShowSignedNum(4, 8, gyro_z, 5);
 	}
 }
 

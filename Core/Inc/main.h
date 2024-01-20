@@ -46,6 +46,8 @@ extern "C" {
 #include "ad.h"
 #include "dma_data_transfer.h"
 #include "serial.h"
+#include "i2c_software.h"
+#include "MPU6050.h"
 
 #ifdef __cplusplus
 }
