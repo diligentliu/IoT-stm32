@@ -48,6 +48,7 @@ extern "C" {
 #include "serial.h"
 #include "i2c_software.h"
 #include "MPU6050.h"
+#include "i2c_hardware.h"
 
 #ifdef __cplusplus
 }

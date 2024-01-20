@@ -1,8 +1,7 @@
-#ifndef STM32_STD_MPU6050_H
-#define STM32_STD_MPU6050_H
+#ifndef STM32_STD_I2C_HARDWARE_H
+#define STM32_STD_I2C_HARDWARE_H
 
 #include "main.h"
-#include "i2c_software.h"
 
 #define MPU6050_ADDRESS 0xD0
 #define	MPU6050_SMPLRT_DIV		0x19
@@ -29,10 +28,10 @@
 #define	MPU6050_PWR_MGMT_2		0x6C
 #define	MPU6050_WHO_AM_I		0x75
 
-void mpu6050_init();
-void mpu6050_w_reg(uint8_t reg_address, uint8_t data);
-uint8_t mpu6050_r_reg(uint8_t reg_address);
-void mpu6050_get_data(int16_t *acc_x, int16_t *acc_y, int16_t *acc_z,
-                      int16_t *gyro_x, int16_t *gyro_y, int16_t *gyro_z);
+void i2c_hardware_init();
+void i2c_hardware_w_reg(uint8_t reg_address, uint8_t data);
+uint8_t i2c_hardware_r_reg(uint8_t reg_address);
+void i2c_hardware_mpu6050_get_data(int16_t *acc_x, int16_t *acc_y, int16_t *acc_z,
+                                   int16_t *gyro_x, int16_t *gyro_y, int16_t *gyro_z);
 
-#endif //STM32_STD_MPU6050_H
+#endif //STM32_STD_I2C_HARDWARE_H

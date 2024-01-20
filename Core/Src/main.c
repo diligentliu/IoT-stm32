@@ -6,13 +6,15 @@ uint8_t data_2[] = {0, 0, 0, 0};
 
 int main(void) {
 	OLED_Init();
-	mpu6050_init();
+	i2c_hardware_init();
 
 	int16_t acc_x, acc_y, acc_z, gyro_x, gyro_y, gyro_z;
-	uint8_t id = mpu6050_r_reg(MPU6050_WHO_AM_I);
-	OLED_ShowHexNum(1, 1, id, 2);
+	uint8_t id = i2c_hardware_r_reg(MPU6050_WHO_AM_I);
+	OLED_ShowString(1, 1, "ID : 00");
+	OLED_ShowHexNum(1, 6, id, 2);
+
 	while (1) {
-		mpu6050_get_data(&acc_x, &acc_y, &acc_z, &gyro_x, &gyro_y, &gyro_z);
+		i2c_hardware_mpu6050_get_data(&acc_x, &acc_y, &acc_z, &gyro_x, &gyro_y, &gyro_z);
 		OLED_ShowSignedNum(2, 1, acc_x, 5);
 		OLED_ShowSignedNum(3, 1, acc_y, 5);
 		OLED_ShowSignedNum(4, 1, acc_z, 5);
