@@ -6,21 +6,31 @@ uint8_t data_2[] = {0, 0, 0, 0};
 
 int main(void) {
 	OLED_Init();
-	i2c_hardware_init();
+	w25q64_software_init();
 
-	int16_t acc_x, acc_y, acc_z, gyro_x, gyro_y, gyro_z;
-	uint8_t id = i2c_hardware_r_reg(MPU6050_WHO_AM_I);
-	OLED_ShowString(1, 1, "ID : 00");
-	OLED_ShowHexNum(1, 6, id, 2);
+	uint8_t MID;
+	uint16_t DID;
+	w25q64_software_read_id(&MID, &DID);
+	OLED_ShowHexNum(1, 1, MID, 2);
+	OLED_ShowHexNum(1, 8, DID, 4);
+
+	uint32_t address = 0x000000;
+	// w25q64_software_sector_erase(address);
+	// w25q64_software_page_program(address, data_1, 4);
+	w25q64_software_read_data(address, data_2, 4);
+	OLED_ShowHexNum(2, 1, data_2[0], 2);
+	OLED_ShowHexNum(2, 4, data_2[1], 2);
+	OLED_ShowHexNum(2, 7, data_2[2], 2);
+	OLED_ShowHexNum(2, 10, data_2[3], 2);
+	w25q64_software_sector_erase(address);
+	w25q64_software_read_data(address, data_2, 4);
+	OLED_ShowHexNum(3, 1, data_2[0], 2);
+	OLED_ShowHexNum(3, 4, data_2[1], 2);
+	OLED_ShowHexNum(3, 7, data_2[2], 2);
+	OLED_ShowHexNum(3, 10, data_2[3], 2);
 
 	while (1) {
-		i2c_hardware_mpu6050_get_data(&acc_x, &acc_y, &acc_z, &gyro_x, &gyro_y, &gyro_z);
-		OLED_ShowSignedNum(2, 1, acc_x, 5);
-		OLED_ShowSignedNum(3, 1, acc_y, 5);
-		OLED_ShowSignedNum(4, 1, acc_z, 5);
-		OLED_ShowSignedNum(2, 8, gyro_x, 5);
-		OLED_ShowSignedNum(3, 8, gyro_y, 5);
-		OLED_ShowSignedNum(4, 8, gyro_z, 5);
+
 	}
 }
 

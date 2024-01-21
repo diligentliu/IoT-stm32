@@ -49,6 +49,8 @@ extern "C" {
 #include "i2c_software.h"
 #include "MPU6050.h"
 #include "i2c_hardware.h"
+#include "spi_software.h"
+#include "w25q64_software.h"
 
 #ifdef __cplusplus
 }
