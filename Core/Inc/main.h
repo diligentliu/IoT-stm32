@@ -51,6 +51,8 @@ extern "C" {
 #include "i2c_hardware.h"
 #include "spi_software.h"
 #include "w25q64_software.h"
+#include "spi_hardware.h"
+#include "w25q64_hardware.h"
 
 #ifdef __cplusplus
 }
