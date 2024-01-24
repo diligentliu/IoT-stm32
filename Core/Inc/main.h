@@ -53,6 +53,7 @@ extern "C" {
 #include "w25q64_software.h"
 #include "spi_hardware.h"
 #include "w25q64_hardware.h"
+#include "rtc.h"
 
 #ifdef __cplusplus
 }

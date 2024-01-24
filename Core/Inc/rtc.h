@@ -1,10 +1,10 @@
-#include "main.h"
+#ifndef STM32_STD_RTC_H
+#define STM32_STD_RTC_H
 
-int16_t num = 0;
-uint8_t data_1[] = {0x04, 0x03, 0x02, 0x01};
-uint8_t data_2[] = {0, 0, 0, 0};
+#include "stm32f10x.h"
+#include "time.h"
 
-int main(void) {
+/*
 	OLED_Init();
 	rtc_init();
 	OLED_ShowString(1, 1, "Date: XXXX-XX-XX");
@@ -21,11 +21,10 @@ int main(void) {
 		OLED_ShowNum(2, 13, local_time.tm_sec, 2);
 		OLED_ShowNum(3, 7, RTC_GetCounter(), 10);
 	}
-}
+ */
+extern struct tm local_time;
+void rtc_init();
+void get_time();
+void set_time();
 
-void TIM2_IRQHandler() {
-	if (TIM_GetITStatus(TIM2, TIM_IT_Update) == SET) {
-		num++;
-		TIM_ClearITPendingBit(TIM2, TIM_IT_Update);
-	}
-}
+#endif //STM32_STD_RTC_H
