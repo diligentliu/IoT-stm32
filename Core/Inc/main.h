@@ -54,6 +54,7 @@ extern "C" {
 #include "spi_hardware.h"
 #include "w25q64_hardware.h"
 #include "rtc.h"
+#include "dht11.h"
 
 #ifdef __cplusplus
 }

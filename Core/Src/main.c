@@ -6,9 +6,12 @@ uint8_t data_2[] = {0, 0, 0, 0};
 
 int main(void) {
 	OLED_Init();
-
+	dht11_init();
+	int8_t temp, htmi;
 	while (1) {
-
+		dht11_read_data(&temp, &htmi);
+		OLED_ShowSignedNum(1, 1, temp, 8);
+		OLED_ShowSignedNum(2, 1, htmi, 8);
 	}
 }
 
