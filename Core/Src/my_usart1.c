@@ -1,29 +1,29 @@
 #include "my_usart1.h"
 
 void My_USART1(void) {
-	GPIO_InitTypeDef GPIO_InitStrue;
-	USART_InitTypeDef USART1_InitStrue;
+	GPIO_InitTypeDef GPIO_InitStruct;
+	USART_InitTypeDef USART1_InitStruct;
 
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);
 
-	GPIO_InitStrue.GPIO_Mode = GPIO_Mode_AF_PP;
-	GPIO_InitStrue.GPIO_Pin = USART1_GPIO_PIN_TX;
-	GPIO_InitStrue.GPIO_Speed = GPIO_Speed_10MHz;
-	GPIO_Init(GPIOA, &GPIO_InitStrue);
+	GPIO_InitStruct.GPIO_Mode = GPIO_Mode_AF_PP;
+	GPIO_InitStruct.GPIO_Pin = USART1_GPIO_PIN_TX;
+	GPIO_InitStruct.GPIO_Speed = GPIO_Speed_50MHz;
+	GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-	GPIO_InitStrue.GPIO_Mode = GPIO_Mode_IN_FLOATING;
-	GPIO_InitStrue.GPIO_Pin = USART1_GPIO_PIN_RX;//PA10
-	GPIO_Init(GPIOA, &GPIO_InitStrue);
+	GPIO_InitStruct.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+	GPIO_InitStruct.GPIO_Pin = USART1_GPIO_PIN_RX;//PA10
+	GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-	USART1_InitStrue.USART_BaudRate = 9600;
-	USART1_InitStrue.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
-	USART1_InitStrue.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
-	USART1_InitStrue.USART_Parity = USART_Parity_No;
-	USART1_InitStrue.USART_StopBits = USART_StopBits_1;
-	USART1_InitStrue.USART_WordLength = USART_WordLength_8b;
+	USART1_InitStruct.USART_BaudRate = 9600;
+	USART1_InitStruct.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
+	USART1_InitStruct.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
+	USART1_InitStruct.USART_Parity = USART_Parity_No;
+	USART1_InitStruct.USART_StopBits = USART_StopBits_1;
+	USART1_InitStruct.USART_WordLength = USART_WordLength_8b;
 
-	USART_Init(USART1, &USART1_InitStrue);
+	USART_Init(USART1, &USART1_InitStruct);
 
 	USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);//接收中断
 	USART_Cmd(USART1, ENABLE);
@@ -38,7 +38,6 @@ void USART_SendByte(USART_TypeDef *USARTx, uint16_t Data) {
 	/* Transmit Data */
 	USARTx->DR = (Data & (uint16_t) 0x01FF);
 	while (USART_GetFlagStatus(USARTx, USART_FLAG_TXE) == RESET);
-
 }
 
 

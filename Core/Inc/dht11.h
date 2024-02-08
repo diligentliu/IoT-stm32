@@ -9,11 +9,15 @@
 /**
 	OLED_Init();
 	dht11_init();
-	int8_t temp, htmi;
 	while (1) {
-		dht11_read_data(&temp, &htmi);
-		OLED_ShowSignedNum(1, 1, temp, 8);
-		OLED_ShowSignedNum(2, 1, htmi, 8);
+		int8_t temp[2], htmi[2];
+		dht11_read_data(temp, temp + 1, htmi, htmi + 1);
+		OLED_ShowNum(1, 1, temp[0], 2);
+		OLED_ShowChar(1, 3, '.');
+		OLED_ShowNum(1, 4, temp[1], 1);
+		OLED_ShowNum(2, 1, htmi[0], 2);
+		OLED_ShowChar(2, 3, '.');
+		OLED_ShowNum(2, 4, htmi[1], 1);
 	}
  */
 uint8_t dht11_init();

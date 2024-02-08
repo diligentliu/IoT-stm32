@@ -4,34 +4,33 @@ uint16_t USART2_RxCounter = 0;
 char USART2_RxBuff[1024];
 
 void My_USART2(void) {
-	GPIO_InitTypeDef GPIO_InitStrue;
-	USART_InitTypeDef USART2_InitStrue;
+	GPIO_InitTypeDef GPIO_InitStruct;
+	USART_InitTypeDef USART2_InitStruct;
 
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, ENABLE);
 
-	GPIO_InitStrue.GPIO_Mode = GPIO_Mode_AF_PP;
-	GPIO_InitStrue.GPIO_Pin = USART2_GPIO_PIN_TX;
-	GPIO_InitStrue.GPIO_Speed = GPIO_Speed_10MHz;
-	GPIO_Init(GPIOA, &GPIO_InitStrue);
+	GPIO_InitStruct.GPIO_Mode = GPIO_Mode_AF_PP;
+	GPIO_InitStruct.GPIO_Pin = USART2_GPIO_PIN_TX;
+	GPIO_InitStruct.GPIO_Speed = GPIO_Speed_50MHz;
+	GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-	GPIO_InitStrue.GPIO_Mode = GPIO_Mode_IN_FLOATING;
-	GPIO_InitStrue.GPIO_Pin = USART2_GPIO_PIN_RX;
-	GPIO_Init(GPIOA, &GPIO_InitStrue);
+	GPIO_InitStruct.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+	GPIO_InitStruct.GPIO_Pin = USART2_GPIO_PIN_RX;
+	GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-	USART2_InitStrue.USART_BaudRate = 115200;
-	USART2_InitStrue.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
-	USART2_InitStrue.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
-	USART2_InitStrue.USART_Parity = USART_Parity_No;
-	USART2_InitStrue.USART_StopBits = USART_StopBits_1;
-	USART2_InitStrue.USART_WordLength = USART_WordLength_8b;
+	USART2_InitStruct.USART_BaudRate = 115200;
+	USART2_InitStruct.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
+	USART2_InitStruct.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
+	USART2_InitStruct.USART_Parity = USART_Parity_No;
+	USART2_InitStruct.USART_StopBits = USART_StopBits_1;
+	USART2_InitStruct.USART_WordLength = USART_WordLength_8b;
 
-	USART_Init(USART2, &USART2_InitStrue);
+	USART_Init(USART2, &USART2_InitStruct);
 
 	USART_ITConfig(USART2, USART_IT_RXNE, ENABLE);
 	USART_Cmd(USART2, ENABLE);
 }
-
 
 __aligned(8) char USART2_TxBuff[256];
 
@@ -49,7 +48,6 @@ void u2_printf(char *fmt, ...) {
 		i++;
 	}
 	while (USART_GetFlagStatus(USART2, USART_FLAG_TC) == RESET);
-
 }
 
 void USART2_IRQHandler(void) {
