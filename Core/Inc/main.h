@@ -29,6 +29,8 @@ extern "C" {
 
 /* Includes ------------------------------------------------------------------*/
 #include <stdio.h>
+#include <stdarg.h>
+#include <string.h>
 
 #include "stm32f10x_it.h"
 #include "count_sensor.h"
@@ -55,7 +57,11 @@ extern "C" {
 #include "w25q64_hardware.h"
 #include "rtc.h"
 #include "dht11.h"
+#include "my_usart1.h"
+#include "my_usart2.h"
+#include "wifi.h"
 
+void NVIC_Config();
 #ifdef __cplusplus
 }
 #endif

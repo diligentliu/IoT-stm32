@@ -23,6 +23,6 @@ void dht11_reset();
 uint8_t dht11_check();
 uint8_t dht11_read_bit();
 uint8_t dht11_read_byte();
-uint8_t dht11_read_data(int8_t *temp, int8_t *htmi);
+uint8_t dht11_read_data(uint8_t *temp1, uint8_t *temp2, uint8_t *htmi1, uint8_t *htmi2);
 
 #endif //STM32_STD_DHT11_H

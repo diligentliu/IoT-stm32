@@ -72,7 +72,7 @@ uint8_t dht11_read_byte() {
 	return data;
 }
 
-uint8_t dht11_read_data(int8_t *temp, int8_t *htmi) {
+uint8_t dht11_read_data(uint8_t *temp1, uint8_t *temp2, uint8_t *htmi1, uint8_t *htmi2) {
 	uint8_t buf[5];
 	dht11_reset();
 	if (!dht11_check()) {
@@ -80,8 +80,10 @@ uint8_t dht11_read_data(int8_t *temp, int8_t *htmi) {
 			buf[i] = dht11_read_byte();
 		}
 		if (buf[0] + buf[1] + buf[2] + buf[3] == buf[4]) {
-			*htmi = buf[0];
-			*temp = buf[2];
+			*htmi1 = buf[0];
+			*htmi2 = buf[1];
+			*temp1 = buf[2];
+			*temp2 = buf[3];
 			return 0;
 		}
 	}
