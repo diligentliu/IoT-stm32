@@ -9,7 +9,7 @@ void w25q64_software_read_id(uint8_t *MID, uint16_t *DID) {
 	spi_software_swap_byte(W25Q64_JEDEC_ID);
 	*MID = spi_software_swap_byte(W25Q64_DUMMY_BYTE);
 	*DID = (spi_software_swap_byte(W25Q64_DUMMY_BYTE) << 8)
-			| spi_software_swap_byte(W25Q64_DUMMY_BYTE);
+	       | spi_software_swap_byte(W25Q64_DUMMY_BYTE);
 	spi_software_stop();
 }
 

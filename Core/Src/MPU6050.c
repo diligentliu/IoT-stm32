@@ -46,15 +46,15 @@ uint8_t mpu6050_r_reg(uint8_t reg_address) {
 void mpu6050_get_data(int16_t *acc_x, int16_t *acc_y, int16_t *acc_z,
                       int16_t *gyro_x, int16_t *gyro_y, int16_t *gyro_z) {
 	*acc_x = (((int16_t) mpu6050_r_reg(MPU6050_ACCEL_XOUT_H)) << 8)
-				| mpu6050_r_reg(MPU6050_ACCEL_XOUT_L);
+	         | mpu6050_r_reg(MPU6050_ACCEL_XOUT_L);
 	*acc_y = (((int16_t) mpu6050_r_reg(MPU6050_ACCEL_YOUT_H)) << 8)
-	            | mpu6050_r_reg(MPU6050_ACCEL_YOUT_L);
+	         | mpu6050_r_reg(MPU6050_ACCEL_YOUT_L);
 	*acc_z = (((int16_t) mpu6050_r_reg(MPU6050_ACCEL_ZOUT_H)) << 8)
-	            | mpu6050_r_reg(MPU6050_ACCEL_ZOUT_L);
+	         | mpu6050_r_reg(MPU6050_ACCEL_ZOUT_L);
 	*gyro_x = (((int16_t) mpu6050_r_reg(MPU6050_GYRO_XOUT_H)) << 8)
-	            | mpu6050_r_reg(MPU6050_GYRO_XOUT_L);
+	          | mpu6050_r_reg(MPU6050_GYRO_XOUT_L);
 	*gyro_y = (((int16_t) mpu6050_r_reg(MPU6050_GYRO_YOUT_H)) << 8)
-	            | mpu6050_r_reg(MPU6050_GYRO_YOUT_L);
+	          | mpu6050_r_reg(MPU6050_GYRO_YOUT_L);
 	*gyro_z = (((int16_t) mpu6050_r_reg(MPU6050_GYRO_ZOUT_H)) << 8)
-	            | mpu6050_r_reg(MPU6050_GYRO_ZOUT_L);
+	          | mpu6050_r_reg(MPU6050_GYRO_ZOUT_L);
 }

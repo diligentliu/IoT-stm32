@@ -60,6 +60,10 @@ extern "C" {
 #include "my_usart1.h"
 #include "my_usart2.h"
 #include "wifi.h"
+#include "utils_hmac.h"
+#include "utils_md5.h"
+#include "utils_sha1.h"
+#include "mqtt.h"
 
 void NVIC_Config();
 #ifdef __cplusplus

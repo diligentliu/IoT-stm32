@@ -10,25 +10,12 @@ int main(void) {
 	My_USART1();
 	My_USART2();
 	dht11_init();
-	// wifi_config("AT+RST", "ready",
-	//             "RESET", 10);
-	// wifi_config("AT+CWMODE=1", "OK",
-	// 			"WiFi Mode", 10);
-	// wifi_config("AT+RST", "ready",
-	// 			"RESET", 10);
-	// wifi_config("AT+CWAUTOCONN=0", "OK", "Cancel automatic connection", 10);
-	// wifi_connect_router(10);
-	// wifi_config("AT+CIPMUX=0", "OK",
-	// 			"Single connection mode", 10);
-	// wifi_config("AT+CIPMODE=1", "OK",
-	// 			"SerialNet mode", 10);
-	// wifi_config("AT+CIPSTART=\"TCP\",\"192.168.5.25\",8080", "OK",
-	// 			"TCP connection", 10);
-	// wifi_config("AT+CIPSEND", "OK",
-	// 			"Enter SerialNet mode", 10);
+
+	mqtt_data_init();
+	mqtt_connect_message();
 	while (1) {
 		delay_s(1);
-		u1_printf("Hello, World\r\n");
+		// u1_printf("Hello, World\r\n");
 		int8_t temp[2], htmi[2];
 		dht11_read_data(temp, temp + 1, htmi, htmi + 1);
 		OLED_ShowNum(1, 1, temp[0], 2);

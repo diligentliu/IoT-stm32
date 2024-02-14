@@ -10,7 +10,7 @@ extern uint16_t USART2_RxCounter;
 extern char USART2_RxBuff[1024];
 
 void My_USART2(void);
-void USART_SendByte(USART_TypeDef* USARTx, uint16_t Data);
+void USART_SendByte(USART_TypeDef *USARTx, uint16_t Data);
 void u2_printf(char *fmt, ...);
 
 #endif

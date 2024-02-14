@@ -2,6 +2,7 @@
 #define STM32_STD_PWM_H
 
 #include "main.h"
+
 void pwm_init();
 void pwm_set_compare(uint16_t);
 void pwm_set_prescaler(uint16_t prescaler);

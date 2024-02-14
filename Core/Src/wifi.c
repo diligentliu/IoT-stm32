@@ -42,3 +42,24 @@ int wifi_connect_router(uint8_t delay) {
 		return -1;
 	}
 }
+
+int wifi_connect(const char* server_ip, const uint16_t server_port) {
+	wifi_config("AT+RST", "ready",
+	            "RESET", 10);
+	wifi_config("AT+CWMODE=1", "OK",
+				"WiFi Mode", 10);
+	wifi_config("AT+RST", "ready",
+				"RESET", 10);
+	wifi_config("AT+CWAUTOCONN=0", "OK", "Cancel automatic connection", 10);
+	wifi_connect_router(10);
+	wifi_config("AT+CIPMUX=0", "OK",
+				"Single connection mode", 10);
+	wifi_config("AT+CIPMODE=1", "OK",
+				"SerialNet mode", 10);
+	char command[1024];
+	sprintf(command, "AT+CIPSTART=\"TCP\",\"%s\",%d", server_ip, server_port);
+	wifi_config(command, "OK",
+				"TCP connection", 10);
+	wifi_config("AT+CIPSEND", "OK",
+				"Enter SerialNet mode", 10);
+}
