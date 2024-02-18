@@ -12,6 +12,7 @@ extern char USART2_RxBuff[1024];
 void My_USART2(void);
 void USART_SendByte(USART_TypeDef *USARTx, uint16_t Data);
 void u2_printf(char *fmt, ...);
+void u2_TxData(unsigned char *data);
 
 #endif
 

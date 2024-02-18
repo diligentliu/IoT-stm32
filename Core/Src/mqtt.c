@@ -7,8 +7,12 @@ char username[128];
 uint16_t username_size;
 char password[128];
 uint16_t password_size;
-char server_ip[128];
-uint16_t server_port;
+
+// 发送缓冲区
+u_char mqtt_tx_buff[7][400];
+u_char* mqtt_tx_in_ptr = mqtt_tx_buff[0];
+u_char* mqtt_tx_out_ptr = mqtt_tx_buff[0];
+u_char* mqtt_tx_end_ptr = mqtt_tx_buff[6];
 
 void mqtt_connect_message() {
 	bzero(mqtt_buff, sizeof(mqtt_buff));
@@ -62,6 +66,7 @@ void mqtt_connect_message() {
 	// 	u1_printf("%02x ", mqtt_buff[i]);
 	// }
 	// u1_printf("\r\n");
+	mqtt_deal_tx_data(mqtt_buff, mqtt_buff_index);
 }
 
 void mqtt_data_init() {
@@ -78,8 +83,14 @@ void mqtt_data_init() {
 	sprintf(temp, "clientId%sdeviceName%sproductKey%s", DEVICE_NAME, DEVICE_NAME, PRODUCT_KEY);
 	utils_hmac_sha1(temp, strlen(temp), password, DEVICE_SECRET, DEVICE_SECRET_LEN);
 	password_size = strlen(password);
+}
 
-	memset(server_ip, 0, sizeof(server_ip));
-	sprintf(server_ip, "iot-06z00d8jolur3uo.mqtt.iothub.aliyuncs.com");
-	server_port = 1883;
+void mqtt_deal_tx_data(u_char *data, int size) {
+	mqtt_tx_in_ptr[0] = size / 256;
+	mqtt_tx_in_ptr[1] = size % 256;
+	memcpy(mqtt_tx_in_ptr + 2, data, size);
+	mqtt_tx_in_ptr += 400;
+	if (mqtt_tx_in_ptr == mqtt_tx_end_ptr) {
+		mqtt_tx_in_ptr = mqtt_tx_buff[0];
+	}
 }

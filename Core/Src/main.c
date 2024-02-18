@@ -10,11 +10,12 @@ int main(void) {
 	My_USART1();
 	My_USART2();
 	dht11_init();
-
+	wifi_connect("192.168.1.8", 8080);
 	mqtt_data_init();
 	mqtt_connect_message();
+	// mqtt_tx_data(mqtt_tx_out_ptr);
 	while (1) {
-		delay_s(1);
+		// delay_s(1);
 		// u1_printf("Hello, World\r\n");
 		int8_t temp[2], htmi[2];
 		dht11_read_data(temp, temp + 1, htmi, htmi + 1);
@@ -24,6 +25,15 @@ int main(void) {
 		OLED_ShowNum(2, 1, htmi[0], 2);
 		OLED_ShowChar(2, 3, '.');
 		OLED_ShowNum(2, 4, htmi[1], 1);
+		if (mqtt_tx_out_ptr != mqtt_tx_in_ptr) {
+			if (mqtt_tx_out_ptr[2] == 0x10) {
+				mqtt_tx_data(mqtt_tx_out_ptr);
+				mqtt_tx_out_ptr += 400;
+				if (mqtt_tx_out_ptr == mqtt_tx_end_ptr) {
+					mqtt_tx_out_ptr = mqtt_tx_buff[0];
+				}
+			}
+		}
 	}
 }
 
@@ -35,13 +45,13 @@ void TIM2_IRQHandler() {
 }
 
 void NVIC_Config() {
-	NVIC_InitTypeDef nvicInitTypeDef;
+	NVIC_InitTypeDef NVIC_InitStruct;
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
 
-	nvicInitTypeDef.NVIC_IRQChannel = USART2_IRQn;
-	nvicInitTypeDef.NVIC_IRQChannelCmd = ENABLE;
-	nvicInitTypeDef.NVIC_IRQChannelSubPriority = 0;
-	nvicInitTypeDef.NVIC_IRQChannelPreemptionPriority = 0;
+	NVIC_InitStruct.NVIC_IRQChannel = USART2_IRQn;
+	NVIC_InitStruct.NVIC_IRQChannelCmd = ENABLE;
+	NVIC_InitStruct.NVIC_IRQChannelSubPriority = 2;
+	NVIC_InitStruct.NVIC_IRQChannelPreemptionPriority = 2;
 
-	NVIC_Init(&nvicInitTypeDef);
+	NVIC_Init(&NVIC_InitStruct);
 }

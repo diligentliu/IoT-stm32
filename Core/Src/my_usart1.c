@@ -9,11 +9,11 @@ void My_USART1(void) {
 
 	GPIO_InitStruct.GPIO_Mode = GPIO_Mode_AF_PP;
 	GPIO_InitStruct.GPIO_Pin = USART1_GPIO_PIN_TX;
-	GPIO_InitStruct.GPIO_Speed = GPIO_Speed_50MHz;
+	GPIO_InitStruct.GPIO_Speed = GPIO_Speed_10MHz;
 	GPIO_Init(GPIOA, &GPIO_InitStruct);
 
 	GPIO_InitStruct.GPIO_Mode = GPIO_Mode_IN_FLOATING;
-	GPIO_InitStruct.GPIO_Pin = USART1_GPIO_PIN_RX;//PA10
+	GPIO_InitStruct.GPIO_Pin = USART1_GPIO_PIN_RX;
 	GPIO_Init(GPIOA, &GPIO_InitStruct);
 
 	USART1_InitStruct.USART_BaudRate = 9600;
