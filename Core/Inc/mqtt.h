@@ -7,8 +7,8 @@
 #define DEVICE_NAME         "DHT11"
 #define DEVICE_SECRET       "a17482225d183a76280cc434742ea0be"
 #define DEVICE_SECRET_LEN   strlen(DEVICE_SECRET)
-// #define SERVER_IP           "iot-06z00d8jolur3uo.mqtt.iothub.aliyuncs.com"
-// #define SERVER_PORT         1883
+#define SERVER_IP           "iot-06z00d8jolur3uo.mqtt.iothub.aliyuncs.com"
+#define SERVER_PORT         1883
 
 #define  mqtt_tx_data(x)       u2_TxData(x)
 

@@ -10,9 +10,9 @@ uint16_t password_size;
 
 // 发送缓冲区
 u_char mqtt_tx_buff[7][400];
-u_char* mqtt_tx_in_ptr = mqtt_tx_buff[0];
-u_char* mqtt_tx_out_ptr = mqtt_tx_buff[0];
-u_char* mqtt_tx_end_ptr = mqtt_tx_buff[6];
+u_char *mqtt_tx_in_ptr = mqtt_tx_buff[0];
+u_char *mqtt_tx_out_ptr = mqtt_tx_buff[0];
+u_char *mqtt_tx_end_ptr = mqtt_tx_buff[6];
 
 void mqtt_connect_message() {
 	bzero(mqtt_buff, sizeof(mqtt_buff));

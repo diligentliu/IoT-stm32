@@ -10,7 +10,7 @@ int main(void) {
 	My_USART1();
 	My_USART2();
 	dht11_init();
-	wifi_connect("192.168.1.8", 8080);
+	wifi_connect(SERVER_IP, SERVER_PORT);
 	mqtt_data_init();
 	mqtt_connect_message();
 	// mqtt_tx_data(mqtt_tx_out_ptr);
