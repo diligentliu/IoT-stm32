@@ -3,15 +3,11 @@
 int8_t wifi_config0(int delay) {
 	memset(WiFi_RX_BUF, 0, sizeof(WiFi_RX_BUF));
 	WiFi_RxCounter = 0;
-	u2_printf("AT+RST\r\n");
 	while (delay--) {
 		delay_ms(1000);
-		int i = WiFi_RxCounter;
-		while (i > 0 && WiFi_RX_BUF[--i] != '\0');
-		if (strstr(WiFi_RX_BUF + i + 1, "ready")) {
+		if (strstr(WiFi_RX_BUF, "ready")) {
 			break;
 		}
-		// u1_printf("%s", WiFi_RX_BUF);
 		u1_printf("%d ", delay);
 	}
 	return delay > 0 ? 0 : 1;
@@ -28,11 +24,6 @@ int8_t wifi_config(int delay, char *cmd, char *response) {
 		}
 		u1_printf("%d ", delay);
 	}
-	// u1_printf("%s\r\n", WiFi_RX_BUF);
-	// for (int i = 0; i < 1024; ++i) {
-	// 	u1_printf("%c", WiFi_RX_BUF[i]);
-	// }
-	// u1_printf("\r\n");
 	return delay > 0 ? 0 : 1;
 }
 
@@ -42,14 +33,10 @@ int8_t wifi_connect_router(uint8_t delay) {
 	u2_printf("AT+CWJAP_DEF=\"%s\",\"%s\"\r\n", SSID, PASSWORD);
 	while (delay--) {
 		delay_ms(1000);
-		if (strstr(WiFi_RX_BUF, "OK")) {
+		if (strstr(WiFi_RX_BUF, "\r\nOK")) {
 			break;
 		}
 		u1_printf("%d ", delay);
-	}
-	// u1_printf("%s\r\n", WiFi_RX_BUF);
-	for (int i = 0; i <= WiFi_RxCounter; ++i) {
-		u1_printf("%c", WiFi_RX_BUF[i]);
 	}
 	return delay > 0 ? 0 : 1;
 }
@@ -65,7 +52,6 @@ int8_t wifi_tcp_connect(const char *server_ip, const int server_port, int delay)
 		}
 		u1_printf("%d ", delay);
 	}
-	// u1_printf("%s\r\n", WiFi_RX_BUF);
 	return delay > 0 ? 0 : 1;
 }
 
@@ -90,7 +76,7 @@ int8_t wifi_connect(const char *server_ip, const int server_port) {
 	u1_printf("\r\n");
 	// 2. 重启(命令方式)
 	u1_printf("2、准备复位!\r\n");
-	if (wifi_config0(100)) {
+	if (wifi_config(100, "AT+RST\r\n", "ready")) {
 		u1_printf("复位失败!\r\n");
 		return -1;
 	} else {

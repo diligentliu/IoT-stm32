@@ -52,7 +52,10 @@ void u2_printf(char *fmt, ...) {
 
 void USART2_IRQHandler() {
 	if (USART_GetITStatus(USART2, USART_IT_RXNE) == SET) {
-		USART2_RxBuff[USART2_RxCounter++] = USART_ReceiveData(USART2);
+		char c = USART_ReceiveData(USART2);
+		if (c) {
+			USART2_RxBuff[USART2_RxCounter++] = c;
+		}
 	}
 }
 
