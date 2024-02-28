@@ -12,12 +12,12 @@
 #define WiFi_RxCounter  USART2_RxCounter
 #define WiFi_RX_BUF     USART2_RxBuff
 
-#define SSID        "CU_my6R"
-#define PASSWORD    "LW123321"
+#define SSID        "Diligent iPhone"
+#define PASSWORD    "         "
 
-int8_t wifi_config(int delay, char *cmd, char *response);
-int8_t wifi_connect_router(uint8_t delay);
-int8_t wifi_tcp_connect(const char *server_ip, int server_port, int delay);
+int8_t wifi_config(int8_t delay, char *cmd, char *response);
+int8_t wifi_connect_router(int8_t delay);
+int8_t wifi_tcp_connect(const char *server_ip, int server_port, int8_t delay);
 int8_t wifi_connect(const char *server_ip, int server_port);
 
 #endif //STM32_STD_WIFI_H

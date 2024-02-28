@@ -17,6 +17,11 @@ extern u_char* mqtt_tx_in_ptr;
 extern u_char* mqtt_tx_out_ptr;
 extern u_char* mqtt_tx_end_ptr;
 
+extern u_char mqtt_rx_buff[7][400];
+extern u_char *mqtt_rx_in_ptr;
+extern u_char *mqtt_rx_out_ptr;
+extern u_char *mqtt_rx_end_ptr;
+
 void mqtt_data_init();
 void mqtt_connect_message();
 void mqtt_deal_tx_data(u_char *data, int size);

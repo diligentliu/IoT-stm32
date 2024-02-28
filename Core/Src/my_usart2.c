@@ -50,11 +50,22 @@ void u2_printf(char *fmt, ...) {
 	while (USART_GetFlagStatus(USART2, USART_FLAG_TC) == RESET);
 }
 
+extern int8_t connect_flag;
 void USART2_IRQHandler() {
 	if (USART_GetITStatus(USART2, USART_IT_RXNE) == SET) {
-		char c = USART_ReceiveData(USART2);
-		if (c) {
-			USART2_RxBuff[USART2_RxCounter++] = c;
+		if (connect_flag == 0) {
+			char c = USART_ReceiveData(USART2);
+			if (c) {
+				USART2_RxBuff[USART2_RxCounter++] = c;
+			}
+		} else {
+			USART2_RxBuff[USART2_RxCounter] = USART_ReceiveData(USART2);
+			if (USART2_RxCounter == 0) {
+				TIM_Cmd(TIM4, ENABLE);
+			} else {
+				TIM_SetCounter(TIM4, 0);
+			}
+			++USART2_RxCounter;
 		}
 	}
 }

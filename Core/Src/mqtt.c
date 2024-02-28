@@ -14,6 +14,13 @@ u_char *mqtt_tx_in_ptr = mqtt_tx_buff[0];
 u_char *mqtt_tx_out_ptr = mqtt_tx_buff[0];
 u_char *mqtt_tx_end_ptr = mqtt_tx_buff[6];
 
+int8_t connect_flag = 0;
+
+u_char mqtt_rx_buff[7][400];
+u_char *mqtt_rx_in_ptr = mqtt_rx_buff[0];
+u_char *mqtt_rx_out_ptr = mqtt_rx_buff[0];
+u_char *mqtt_rx_end_ptr = mqtt_rx_buff[6];
+
 void mqtt_connect_message() {
 	bzero(mqtt_buff, sizeof(mqtt_buff));
 	uint8_t mqtt_buff_index = 0;

@@ -1,7 +1,7 @@
 #include "wifi.h"
 
-int8_t wifi_config0(int delay) {
-	memset(WiFi_RX_BUF, 0, sizeof(WiFi_RX_BUF));
+int8_t wifi_config0(int8_t delay) {
+	memset(WiFi_RX_BUF, 0, 1024);
 	WiFi_RxCounter = 0;
 	while (delay--) {
 		delay_ms(1000);
@@ -10,11 +10,12 @@ int8_t wifi_config0(int delay) {
 		}
 		u1_printf("%d ", delay);
 	}
+	// u1_printf("%s", WiFi_RX_BUF);
 	return delay > 0 ? 0 : 1;
 }
 
-int8_t wifi_config(int delay, char *cmd, char *response) {
-	memset(WiFi_RX_BUF, 0, sizeof(WiFi_RX_BUF));
+int8_t wifi_config(int8_t delay, char *cmd, char *response) {
+	memset(WiFi_RX_BUF, 0, 1024);
 	WiFi_RxCounter = 0;
 	u2_printf("%s", cmd);
 	while (delay--) {
@@ -24,24 +25,26 @@ int8_t wifi_config(int delay, char *cmd, char *response) {
 		}
 		u1_printf("%d ", delay);
 	}
+	// u1_printf("%s", WiFi_RX_BUF);
 	return delay > 0 ? 0 : 1;
 }
 
-int8_t wifi_connect_router(uint8_t delay) {
-	memset(WiFi_RX_BUF, 0, sizeof(WiFi_RX_BUF));
+int8_t wifi_connect_router(int8_t delay) {
+	memset(WiFi_RX_BUF, 0, 1024);
 	WiFi_RxCounter = 0;
 	u2_printf("AT+CWJAP_DEF=\"%s\",\"%s\"\r\n", SSID, PASSWORD);
 	while (delay--) {
 		delay_ms(1000);
-		if (strstr(WiFi_RX_BUF, "\r\nOK")) {
+		if (strstr(WiFi_RX_BUF, "WIFI GOT IP\r\n\r\nOK")) {
 			break;
 		}
 		u1_printf("%d ", delay);
 	}
+	// u1_printf("%s", WiFi_RX_BUF);
 	return delay > 0 ? 0 : 1;
 }
 
-int8_t wifi_tcp_connect(const char *server_ip, const int server_port, int delay) {
+int8_t wifi_tcp_connect(const char *server_ip, const int server_port, int8_t delay) {
 	memset(WiFi_RX_BUF, 0, sizeof(WiFi_RX_BUF));
 	WiFi_RxCounter = 0;
 	u2_printf("AT+CIPSTART=\"TCP\",\"%s\",%d\r\n", server_ip, server_port);
@@ -52,6 +55,7 @@ int8_t wifi_tcp_connect(const char *server_ip, const int server_port, int delay)
 		}
 		u1_printf("%d ", delay);
 	}
+	// u1_printf("%s", WiFi_RX_BUF);
 	return delay > 0 ? 0 : 1;
 }
 
