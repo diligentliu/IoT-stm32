@@ -35,7 +35,7 @@ int8_t wifi_connect_router(int8_t delay) {
 	u2_printf("AT+CWJAP_DEF=\"%s\",\"%s\"\r\n", SSID, PASSWORD);
 	while (delay--) {
 		delay_ms(1000);
-		if (strstr(WiFi_RX_BUF, "WIFI GOT IP\r\n\r\nOK")) {
+		if (strstr(WiFi_RX_BUF, "OK")) {
 			break;
 		}
 		u1_printf("%d ", delay);

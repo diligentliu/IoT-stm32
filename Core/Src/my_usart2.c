@@ -50,7 +50,6 @@ void u2_printf(char *fmt, ...) {
 	while (USART_GetFlagStatus(USART2, USART_FLAG_TC) == RESET);
 }
 
-extern int8_t connect_flag;
 void USART2_IRQHandler() {
 	if (USART_GetITStatus(USART2, USART_IT_RXNE) == SET) {
 		if (connect_flag == 0) {

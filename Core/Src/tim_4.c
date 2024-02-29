@@ -7,7 +7,7 @@ void TIM4_Init(uint16_t arr, uint16_t psc) {
 	TIM_TimeBaseInitStruct.TIM_Period = arr;
 	TIM_TimeBaseInitStruct.TIM_Prescaler = psc;
 	TIM_TimeBaseInitStruct.TIM_CounterMode = TIM_CounterMode_Up;
-	TIM_TimeBaseInitStruct.TIM_ClockDivision = 0;
+	TIM_TimeBaseInitStruct.TIM_ClockDivision = TIM_CKD_DIV1;
 	TIM_TimeBaseInit(TIM4, &TIM_TimeBaseInitStruct);
 
 	TIM_ITConfig(TIM4, TIM_IT_Update, ENABLE);

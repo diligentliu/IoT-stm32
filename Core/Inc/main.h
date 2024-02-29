@@ -44,6 +44,7 @@ extern "C" {
 #include "utils_sha1.h"
 #include "mqtt.h"
 #include "tim_4.h"
+#include "tim_3.h"
 
 void NVIC_Config();
 #ifdef __cplusplus
