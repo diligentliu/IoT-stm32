@@ -62,7 +62,7 @@ int8_t wifi_tcp_connect(const char *server_ip, const int server_port, int8_t del
 int8_t wifi_connect(const char *server_ip, const int server_port) {
 	// 0. 复位
 	u1_printf("0、准备复位!\r\n");
-	if (wifi_config0(100)) {
+	if (wifi_config(50, "AT+RST\r\n", "ready")) {
 		u1_printf("复位失败!\r\n");
 		return -1;
 	} else {
@@ -80,7 +80,7 @@ int8_t wifi_connect(const char *server_ip, const int server_port) {
 	u1_printf("\r\n");
 	// 2. 重启(命令方式)
 	u1_printf("2、准备复位!\r\n");
-	if (wifi_config(100, "AT+RST\r\n", "ready")) {
+	if (wifi_config(50, "AT+RST\r\n", "ready")) {
 		u1_printf("复位失败!\r\n");
 		return -1;
 	} else {

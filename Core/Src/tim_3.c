@@ -18,16 +18,19 @@ void TIM3_Init(uint16_t arr, uint16_t psc) {
 
 void TIM3_IRQHandler() {
 	if (TIM_GetITStatus(TIM3, TIM_IT_Update) != RESET) {
+		u1_printf("what are you doing?\r\n");
 		switch (ping_flag) {
 			case 0:
+			case 1:
+			case 2:
 				mqtt_ping_message();
 				break;
-			case 2:
+			case 3:
 				TIM3_Init(6000 - 1, 36000 - 1);
 				TIM_Cmd(TIM3, ENABLE);
 				mqtt_ping_message();
 				break;
-			case 3:
+			case 4:
 				connect_flag = 0;
 				connect_pack_flag = 0;
 				subscribe_flag = 0;
@@ -37,6 +40,12 @@ void TIM3_IRQHandler() {
 				break;
 		}
 		++ping_flag;
+		u1_printf("%d\r\n", mqtt_tx_out_ptr != mqtt_tx_in_ptr);
+		int size = mqtt_tx_out_ptr[0] * 256 + mqtt_tx_out_ptr[1] + 2;
+		for (int i = 0; i < size; ++i) {
+			u1_printf("%02x ", mqtt_tx_out_ptr[i]);
+		}
+		u1_printf("\r\n");
 		TIM_ClearITPendingBit(TIM3, TIM_IT_Update);
 	}
 }

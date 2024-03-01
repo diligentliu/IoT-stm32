@@ -72,9 +72,11 @@ void USART2_IRQHandler() {
 void u2_TxData(unsigned char *data) {
 	while (USART_GetFlagStatus(USART2, USART_FLAG_TC) == RESET);
 	int size = data[0] * 256 + data[1] + 2;
+	u1_printf("串口在向 ESP8266 发送\t");
 	for (int i = 2; i < size; i++) {
-		// u1_printf("%02x ", data[i]);
+		u1_printf("%02x ", data[i]);
 		USART_SendData(USART2, data[i]);
 		while (USART_GetFlagStatus(USART2, USART_FLAG_TC) == RESET);
 	}
+	u1_printf("\r\n");
 }

@@ -27,6 +27,7 @@ void dht11_reset();
 uint8_t dht11_check();
 uint8_t dht11_read_bit();
 uint8_t dht11_read_byte();
-uint8_t dht11_read_data(uint8_t *temp1, uint8_t *temp2, uint8_t *htmi1, uint8_t *htmi2);
+uint8_t dht11_read_data(int8_t *temp1, int8_t *temp2, int8_t *htmi1, int8_t *htmi2);
+void Sensor_DHT11(void);
 
 #endif //STM32_STD_DHT11_H

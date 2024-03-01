@@ -15,9 +15,9 @@
 #define  mqtt_tx_data(x)       u2_TxData(x)
 
 extern u_char mqtt_tx_buff[7][400];
-extern u_char* mqtt_tx_in_ptr;
-extern u_char* mqtt_tx_out_ptr;
-extern u_char* mqtt_tx_end_ptr;
+extern u_char *mqtt_tx_in_ptr;
+extern u_char *mqtt_tx_out_ptr;
+extern u_char *mqtt_tx_end_ptr;
 
 extern uint8_t connect_flag;
 extern uint8_t connect_pack_flag;

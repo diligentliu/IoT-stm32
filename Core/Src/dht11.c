@@ -72,7 +72,7 @@ uint8_t dht11_read_byte() {
 	return data;
 }
 
-uint8_t dht11_read_data(uint8_t *temp1, uint8_t *temp2, uint8_t *htmi1, uint8_t *htmi2) {
+uint8_t dht11_read_data(int8_t *temp1, int8_t *temp2, int8_t *htmi1, int8_t *htmi2) {
 	uint8_t buf[5];
 	dht11_reset();
 	if (!dht11_check()) {
@@ -88,4 +88,17 @@ uint8_t dht11_read_data(uint8_t *temp1, uint8_t *temp2, uint8_t *htmi1, uint8_t 
 		}
 	}
 	return 1;
+}
+
+void Sensor_DHT11(void) {
+	uint8_t flag;
+	int8_t temp[2], htmi[2];
+
+	flag = dht11_read_data(temp, temp + 1, htmi, htmi + 1);
+	if (flag == 0) {
+		u1_printf("temperature is %d.%d\r\n", temp[0], temp[1]);
+		u1_printf("humidity is %d.%d\r\n", htmi[0], htmi[1]);
+	} else {
+		u1_printf("DHT11 传感器读取失败\r\n");
+	}
 }

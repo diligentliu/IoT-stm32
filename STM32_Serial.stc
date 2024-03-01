@@ -1,4 +1,4 @@
-Port = usbserial-1120
+Port = usbserial-1130
 BaudRate = 115200
 DataBits = 8
 Parity = N
@@ -133,4 +133,4 @@ ChartRestrictNoOfDatapoints = false
 ChartNoOfDatapoints = 1
 KeepOnTop = false
 PreventWindowClosure = false
-WindowPosition = 814,335,886,428
+WindowPosition = 233,381,886,428
